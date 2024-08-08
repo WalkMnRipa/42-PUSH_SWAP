@@ -5,58 +5,69 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/19 12:46:31 by jcohen            #+#    #+#              #
-#    Updated: 2024/06/19 13:04:17 by jcohen           ###   ########.fr        #
+#    Created: 2024/08/08 18:00:25 by jcohen            #+#    #+#              #
+#    Updated: 2024/08/08 18:14:43 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Nom du pro-gramme push_swap 
-# Fichiers de rendu Makefile, *.h, *.c
-# Makefile : NAME, all, clean, fclean, re
-# ajouter la libft à votre projet
-
-
 NAME = push_swap
 
-SRC = push_swap.c
-
-OBJ_DIR = objs
-OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
-
-CC = cc
-
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-RM = rm -f
+SRCDIR = src
+OBJDIR = objs
+LIBFTDIR = libft
+INCDIR = includes
 
-LIBFT_SRC_DIR = ../GITHUB/42-libft
-LIBFT_SRC_FILES =     # Ajoutez tous les fichiers nécessaires
+SRCS = $(SRCDIR)/movements.c $(SRCDIR)/push_swap.c
+OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 
-# Transformer les noms de fichiers source en noms de fichiers objets dans le répertoire d'objets
-LIBFT_OBJ_DIR = $(OBJ_DIR)/libft
-LIBFT_OBJ = $(LIBFT_SRC_FILES:%.c=$(LIBFT_OBJ_DIR)/%.o)
+LIBFT = $(LIBFTDIR)/libft.a
 
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) -c $(CFLAGS) $< -o $@
+# Colors
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+RESET = \033[0m
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+# Progress bar
+TOTAL_FILES = $(words $(SRCS))
+COMPILED_FILES = 0
+define update_progress
+    @$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES)+1))))
+    @printf "\r$(YELLOW)[%-20s] %d%% $(GREEN)Compiling...$(RESET)" \
+        "$$(printf '█%.0s' $$(seq 1 $$(($(COMPILED_FILES)*20/$(TOTAL_FILES)))))" \
+        "$$(( $(COMPILED_FILES)*100/$(TOTAL_FILES) ))"
+endef
 
-all: $(NAME)
+all: $(OBJDIR) $(NAME)
+	@echo "\n$(GREEN)Compilation complete!$(RESET)"
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
+
+$(NAME): $(OBJS) $(LIBFT)
+	@echo "\n$(GREEN)Linking objects...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBFTDIR) -c $< -o $@
+	$(call update_progress)
+
+$(LIBFT):
+	@echo "$(GREEN)Compiling libft...$(RESET)"
+	@make -C $(LIBFTDIR)
 
 clean:
-	$(RM) -r $(OBJ_DIR)
+	@echo "$(YELLOW)Cleaning object files...$(RESET)"
+	@rm -rf $(OBJDIR)
+	@make -C $(LIBFTDIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	@echo "$(YELLOW)Cleaning executable...$(RESET)"
+	@rm -f $(NAME)
+	@make -C $(LIBFTDIR) fclean
 
 re: fclean all
 
 .PHONY: all clean fclean re
-
-libft:
-	@make -C libft
-
-$(NAME): libft
-
