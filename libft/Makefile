@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 12:08:36 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/13 18:15:29 by jcohen           ###   ########.fr        #
+#    Updated: 2024/08/09 17:04:45 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = ft_strlen.c ft_toupper.c ft_tolower.c ft_strrchr.c ft_strnstr.c ft_strncmp
 	  ft_memcmp.c ft_memchr.c ft_isprint.c ft_isdigit.c ft_isascii.c ft_isalpha.c \
 	  ft_isalnum.c ft_bzero.c ft_atoi.c ft_calloc.c ft_strdup.c ft_strjoin.c \
 	  ft_substr.c ft_itoa.c ft_split.c ft_strtrim.c ft_strmapi.c ft_striteri.c \
-	  ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+	  ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_atol.c \
 
 SRC_PRINTF = additional_conversions.c basic_conversions.c conversion_logic.c \
 			 ft_printf.c hexadecimal_operations.c numeric_operations.c \

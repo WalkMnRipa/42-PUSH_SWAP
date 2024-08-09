@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/09 17:36:47 by jcohen           ###   ########.fr       */
+/*   Created: 2024/08/09 16:42:50 by jcohen            #+#    #+#             */
+/*   Updated: 2024/08/09 16:51:04 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int ac, char **av)
+void	free_push_swap(t_push_swap *ps)
 {
-	t_push_swap *ps;
-	if (ac == 2)
-		return (0);
-	ps = init_push_swap(ac - 1);
-	if (!ps)
-		ft_cleanup_and_print_error(ps, "Error: Memory allocation failed");
-	add_arguments_in_stack(ps, ac, av);
-
-	free_push_swap(ps);
-	return (0);
+	if (ps)
+	{
+		if (ps->a)
+		{
+			free(ps->a->stack);
+			free(ps->a);
+		}
+		if (ps->b)
+		{
+			free(ps->b->stack);
+			free(ps->b);
+		}
+		free(ps);
+	}
 }
+
