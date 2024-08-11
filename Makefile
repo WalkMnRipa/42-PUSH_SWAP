@@ -6,69 +6,46 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 18:00:25 by jcohen            #+#    #+#              #
-#    Updated: 2024/08/09 18:34:11 by jcohen           ###   ########.fr        #
+#    Updated: 2024/08/11 20:31:13 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCDIR = src
-OBJDIR = objs
-LIBFTDIR = libft
-INCDIR = includes
+SRC_DIR = src
+CORE_DIR = $(SRC_DIR)
+MOVE_DIR = $(SRC_DIR)/movements
 
-SRCS = $(SRCDIR)/movements.c $(SRCDIR)/push_swap.c $(SRCDIR)/init.c \
-	   $(SRCDIR)/utils.c $(SRCDIR)/parsing.c $(SRCDIR)/cleanup.c \
-	   
-OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+SRCS = $(CORE_DIR)/push_swap.c $(CORE_DIR)/init.c $(CORE_DIR)/cleanup.c \
+       $(CORE_DIR)/utils.c $(CORE_DIR)/parsing.c \
+       $(MOVE_DIR)/swap_push.c $(MOVE_DIR)/rotate.c $(MOVE_DIR)/reverse_rotate.c
 
-LIBFT = $(LIBFTDIR)/libft.a
+OBJS_DIR = objs
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)
 
-# Colors
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RESET = \033[0m
+LIBFT = libft/libft.a
 
-# Progress bar
-TOTAL_FILES = $(words $(SRCS))
-COMPILED_FILES = 0
-define update_progress
-    @$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES)+1))))
-    @printf "\r$(YELLOW)[%-20s] %d%% $(GREEN)Compiling...$(RESET)" \
-        "$$(printf '█%.0s' $$(seq 1 $$(($(COMPILED_FILES)*20/$(TOTAL_FILES)))))" \
-        "$$(( $(COMPILED_FILES)*100/$(TOTAL_FILES) ))"
-endef
-
-all: $(OBJDIR) $(NAME)
-	@echo "\n$(GREEN)Compilation complete!$(RESET)"
-
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@echo "\n$(GREEN)Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBFTDIR) -c $< -o $@
-	$(call update_progress)
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -I./includes -I./libft -c $< -o $@
 
 $(LIBFT):
-	@echo "$(GREEN)Compiling libft...$(RESET)"
-	@make -C $(LIBFTDIR)
+	make -C libft
 
 clean:
-	@echo "$(YELLOW)Cleaning object files...$(RESET)"
-	@rm -rf $(OBJDIR)
-	@make -C $(LIBFTDIR) clean
+	make -C libft clean
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@echo "$(YELLOW)Cleaning executable...$(RESET)"
-	@rm -f $(NAME)
-	@make -C $(LIBFTDIR) fclean
+	make -C libft fclean
+	rm -f $(NAME)
 
 re: fclean all
 

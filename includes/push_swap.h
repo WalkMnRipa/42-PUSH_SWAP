@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:16:57 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 19:29:20 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/11 21:48:14 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,20 @@ void		free_push_swap(t_push_swap *ps);
 void		ft_printf_art(void);
 int			count_total_numbers(int ac, char **av);
 void		ft_free_split(char **split);
+
+/*******************MOVEMENTS********************/
+void		ft_sa(t_push_swap *ps);
+void		ft_sb(t_push_swap *ps);
+void		ft_ss(t_push_swap *ps);
+void		ft_pa(t_push_swap *ps);
+void		ft_pb(t_push_swap *ps);
+void		ft_ra(t_push_swap *ps);
+void		ft_rb(t_push_swap *ps);
+void		ft_rr(t_push_swap *ps);
+void		ft_rra(t_push_swap *ps);
+void		ft_rrb(t_push_swap *ps);
+void		ft_rrr(t_push_swap *ps);
+
+/*********************SORT**********************/
 
 #endif
