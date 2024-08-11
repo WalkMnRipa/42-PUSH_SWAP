@@ -6,16 +6,11 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:03:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/09 17:10:35 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/11 19:32:35 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int ft_all_checkers(t_push_swap *ps, char c)
-{
-    
-}
 
 int	already_exists(t_stack *stack, int nb)
 {
@@ -31,46 +26,60 @@ int	already_exists(t_stack *stack, int nb)
 	return (0);
 }
 
-
-void	split_and_add_in_stack(t_push_swap *ps, char *str)
+int	add_number_in_stack(t_stack *stack, char *str)
 {
-	int		i;
-	char	**split;
-	long	nb;
+	long	num;
 
-	split = ft_split(str, ' ');
-	if (!split)
-		ft_cleanup_and_print_error(ps, "Error: Memory allocation failed");
-	i = 0;
-	while (split[i])
-	{
-		if (!is_valid(split[i]))
-			ft_cleanup_and_print_error(ps, "Error: Invalid number");
-		nb = ft_atol(split[i]);
-		if (nb > INT_MAX || nb < INT_MIN)
-			ft_cleanup_and_print_error(ps, "Error: Number out of range");
-		if (already_exists(ps->a, (int)nb))
-			ft_cleanup_and_print_error(ps, "Error: Duplicate number");
-		if (ps->a->size == ps->a->max_size)
-			ft_cleanup_and_print_error(ps, "Error: Too many arguments");
-		ps->a->stack[ps->a->size] = (int)nb;
-		ps->a->size++;
-		i++;
-	}
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
+	num = ft_atol(str);
+	if (num > INT_MAX || num < INT_MIN)
+		return (0);
+	if (stack->size == stack->max_size)
+		return (0);
+	if (already_exists(stack, (int)num))
+		return (0);
+	stack->stack[stack->size] = (int)num;
+	stack->size++;
+	return (1);
 }
 
-void	add_arguments_in_stack(t_push_swap *ps, int ac, char **av)
+int	parse_single_argument(t_stack *stack, char *str)
+{
+	char	**split;
+	int		i;
+	int		success;
+
+	split = ft_split(str, ' ');
+	success = 1;
+	if (!split)
+		return (0);
+	i = 0;
+	while (split[i] && success)
+	{
+		if ((!is_valid(split[i]) || !add_number_in_stack(stack, split[i])))
+			success = 0;
+		i++;
+	}
+	ft_free_split(split);
+	return (success);
+}
+
+int	parse_multiple_arguments(t_stack *stack, int nb_args, char **av)
 {
 	int	i;
 
 	i = 1;
-	while (i < ac)
+	while (i < nb_args)
 	{
-		split_and_add_in_stack(ps->a, av[i]);
+		if (!is_valid(av[i]) || !add_number_in_stack(stack, av[i]))
+			return (0);
 		i++;
 	}
+	return (1);
+}
+
+int	parse_arguments(t_push_swap *ps, int ac, char **av)
+{
+	if (ac == 2)
+		return (parse_single_argument(ps->a, av[1]));
+	return (parse_multiple_arguments(ps->a, ac, av));
 }

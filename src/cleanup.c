@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 16:42:50 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/09 16:51:04 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/09 19:31:55 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,15 @@ void	free_push_swap(t_push_swap *ps)
 	}
 }
 
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}

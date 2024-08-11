@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 18:00:25 by jcohen            #+#    #+#              #
-#    Updated: 2024/08/08 18:14:43 by jcohen           ###   ########.fr        #
+#    Updated: 2024/08/09 18:34:11 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ OBJDIR = objs
 LIBFTDIR = libft
 INCDIR = includes
 
-SRCS = $(SRCDIR)/movements.c $(SRCDIR)/push_swap.c
+SRCS = $(SRCDIR)/movements.c $(SRCDIR)/push_swap.c $(SRCDIR)/init.c \
+	   $(SRCDIR)/utils.c $(SRCDIR)/parsing.c $(SRCDIR)/cleanup.c \
+	   
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 
 LIBFT = $(LIBFTDIR)/libft.a
