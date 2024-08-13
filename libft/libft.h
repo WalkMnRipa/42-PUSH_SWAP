@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:17:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/09 17:03:48 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/05/26 15:26:56 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_strnstr(const char *big, const char *little,
 						size_t len);
 int					ft_atoi(const char *nptr);
-long				ft_atol(const char *str);
 char				*ft_strdup(const char *source);
 void				*ft_calloc(size_t num, size_t size);
 char				*ft_strjoin(char const *s1, char const *s2);
