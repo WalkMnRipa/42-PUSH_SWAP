@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 18:00:25 by jcohen            #+#    #+#              #
-#    Updated: 2024/08/11 20:31:13 by jcohen           ###   ########.fr        #
+#    Updated: 2024/08/13 17:06:54 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,16 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = src
-CORE_DIR = $(SRC_DIR)
-MOVE_DIR = $(SRC_DIR)/movements
-
-SRCS = $(CORE_DIR)/push_swap.c $(CORE_DIR)/init.c $(CORE_DIR)/cleanup.c \
-       $(CORE_DIR)/utils.c $(CORE_DIR)/parsing.c \
-       $(MOVE_DIR)/swap_push.c $(MOVE_DIR)/rotate.c $(MOVE_DIR)/reverse_rotate.c
-
+SRC_MOV = movements
+SRC_SORT = sort
 OBJS_DIR = objs
+
+SRCS = $(SRC_DIR)/$(SRC_MOV)/reverse_rotate.c $(SRC_DIR)/$(SRC_MOV)/rotate.c \
+	   $(SRC_DIR)/$(SRC_MOV)/swap_push.c $(SRC_DIR)/cleanup.c \
+	   $(SRC_DIR)/init.c $(SRC_DIR)/parsing.c $(SRC_DIR)/utils.c \
+	   $(SRC_DIR)/push_swap.c $(SRC_DIR)/$(SRC_SORT)/small_sorts.c
+
+
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 LIBFT = libft/libft.a

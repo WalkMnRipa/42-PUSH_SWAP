@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:16:57 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 21:48:14 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/13 15:46:51 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		free_push_swap(t_push_swap *ps);
 void		ft_printf_art(void);
 int			count_total_numbers(int ac, char **av);
 void		ft_free_split(char **split);
+int			find_min_index(t_stack *a, int size);
 
 /*******************MOVEMENTS********************/
 void		ft_sa(t_push_swap *ps);
@@ -68,5 +69,10 @@ void		ft_rrb(t_push_swap *ps);
 void		ft_rrr(t_push_swap *ps);
 
 /*********************SORT**********************/
+void		sort_two(t_push_swap *ps);
+void		sort_three(t_push_swap *ps);
+void		sort_four(t_push_swap *ps);
+void		sort_five(t_push_swap *ps);
+void		sort_small_set(t_push_swap *ps);
 
 #endif

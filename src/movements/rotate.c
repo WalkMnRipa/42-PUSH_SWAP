@@ -6,11 +6,11 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:04:23 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 21:47:35 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/13 16:07:06 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 void	ft_ra(t_push_swap *ps)
 {
@@ -27,6 +27,7 @@ void	ft_ra(t_push_swap *ps)
 		i++;
 	}
 	ps->a->stack[i] = tmp;
+	ft_printf("ra\n");
 }
 
 void	ft_rb(t_push_swap *ps)
@@ -44,10 +45,12 @@ void	ft_rb(t_push_swap *ps)
 		i++;
 	}
 	ps->b->stack[i] = tmp;
+	ft_printf("rb\n");
 }
 
 void	ft_rr(t_push_swap *ps)
 {
 	ft_ra(ps);
 	ft_rb(ps);
+	ft_printf("rr\n");
 }

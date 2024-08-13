@@ -6,11 +6,11 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:57:09 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 21:47:32 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/13 16:07:16 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 void	ft_sa(t_push_swap *ps)
 {
@@ -21,6 +21,7 @@ void	ft_sa(t_push_swap *ps)
 	tmp = ps->a->stack[0];
 	ps->a->stack[0] = ps->a->stack[1];
 	ps->a->stack[1] = tmp;
+	ft_printf("sa\n");
 }
 
 void	ft_sb(t_push_swap *ps)
@@ -32,12 +33,14 @@ void	ft_sb(t_push_swap *ps)
 	tmp = ps->b->stack[0];
 	ps->b->stack[0] = ps->b->stack[1];
 	ps->b->stack[1] = tmp;
+	ft_printf("sb\n");
 }
 
 void	ft_ss(t_push_swap *ps)
 {
 	ft_sa(ps);
 	ft_sb(ps);
+	ft_printf("ss\n");
 }
 
 void	ft_pa(t_push_swap *ps)
@@ -61,6 +64,7 @@ void	ft_pa(t_push_swap *ps)
 	}
 	ps->a->size++;
 	ps->b->size--;
+	ft_printf("pa\n");
 }
 
 void	ft_pb(t_push_swap *ps)
@@ -84,4 +88,5 @@ void	ft_pb(t_push_swap *ps)
 	}
 	ps->b->size++;
 	ps->a->size--;
+	ft_printf("pb\n");
 }
