@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/13 17:05:37 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/15 19:24:56 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,47 @@
 // 	printf("  a   |   b\n");
 // }
 
+static int	is_valid_input(int ac, char **av)
+{
+	int		i;
+	char	**split;
+	int		j;
+
+	for (i = 1; i < ac; i++)
+	{
+		split = ft_split(av[i], ' ');
+		if (!split)
+			return (0);
+		j = 0;
+		while (split[j])
+		{
+			if (!is_valid(split[j]))
+			{
+				ft_free_split(split);
+				return (0);
+			}
+			j++;
+		}
+		ft_free_split(split);
+	}
+	return (1);
+}
+
 static t_push_swap	*init_all(int ac, char **av)
 {
 	int			total_numbers;
 	t_push_swap	*ps;
 
-	if (ac < 2)
-		return (NULL);
 	total_numbers = count_total_numbers(ac, av);
 	if (total_numbers <= 0)
 	{
-		ft_printf("Error\n");
+		ft_putstr_fd("Error\n", 2);
 		return (NULL);
 	}
 	ps = init_push_swap(total_numbers);
 	if (!ps)
 	{
-		ft_printf("Error\n");
+		ft_putstr_fd("Error\n", 2);
 		return (NULL);
 	}
 	return (ps);
@@ -67,61 +91,28 @@ int	main(int ac, char **av)
 {
 	t_push_swap	*ps;
 
-	ps = init_all(ac, av);
-	if (!ps)
-		return (1);
-	if (!parse_arguments(ps, ac, av))
+	if (ac < 2)
+		return (0);
+	if (!is_valid_input(ac, av))
 	{
-		ft_cleanup_and_print_error(ps, "Error");
+		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	ft_printf_art();
-	if (ps->a->size <= 5)
-		sort_small_set(ps);
-	else
+	ps = init_all(ac, av);
+	if (!ps || !parse_arguments(ps, ac, av))
 	{
-		normalize_data(ps);
-		radix_sort(ps);
+		ft_cleanup_and_print_error(ps);
+		return (1);
+	}
+	if (!is_sorted(ps->a))
+	{
+		if (ps->a->size <= 5)
+			sort_small_set(ps);
+		else
+		{
+			radix_sort(ps);
+		}
 	}
 	free_push_swap(ps);
 	return (0);
 }
-
-/*
- *
- *  +------------+
- *  |   Début    |
- *  +------------+
- *         |
- *         v
- *  +------------------------+
- *  | Initialisation/Parsing |
- *  +------------------------+
- *         |
- *         v
- *  +-------------------------+
- *  | Nombre d'éléments <= 5? |
- *  +-------------------------+
- *     |              |
- *    Oui            Non
- *     |              |
- *     v              v
- *  +-----------+  +----------------+
- *  |Sort Small |  | Normalize Data |
- *  |    Set    |  +----------------+
- *  +-----------+         |
- *     |                  v
- *     |           +---------------+
- *     |           |   Radix Sort  |
- *     |           +---------------+
- *     |                  |
- *     |                  |
- *     |        +-------------------+
- *     +------->| Afficher Résultat |
- *              +-------------------+
- *                       |
- *                       v
- *                 +------------+
- *                 |    Fin     |
- *                 +------------+
- */

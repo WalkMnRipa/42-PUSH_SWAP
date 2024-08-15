@@ -6,26 +6,18 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:19:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/13 17:06:36 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/15 19:26:28 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_printf_art(void)
+void	ft_cleanup_and_print_error(t_push_swap *ps)
 {
-	ft_printf(" _____ _____ _____ _____    _____ _ _ _ _____ _____ \n");
-	ft_printf("|  _  |  |  |   __|  |  |  |   __| | | |  _  |  _  |\n");
-	ft_printf("|   __|  |  |__   |     |  |__   | | | |     |   __|\n");
-	ft_printf("|__|  |_____|_____|__|__|  |_____|_____|__|__|__|   \n");
-	ft_printf("                                                    \n");
-}
-
-void	ft_cleanup_and_print_error(t_push_swap *ps, char *error)
-{
-	ft_printf("%s\n", error);
-	free_push_swap(ps);
-	exit(0);
+	ft_putstr_fd("Error\n", 2);
+	if (ps)
+		free_push_swap(ps);
+	exit(1);
 }
 
 int	is_valid(char *str)
@@ -37,6 +29,8 @@ int	is_valid(char *str)
 		return (0);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -73,23 +67,69 @@ int	count_total_numbers(int ac, char **av)
 	return (total_numbers);
 }
 
-int	find_min_index(t_stack *a, int size)
+int	find_min(t_stack *a)
 {
 	int	min;
 	int	i;
-	int	min_index;
 
 	min = a->stack[0];
-	i = 0;
-	min_index = 0;
-	while (i < size)
+	i = 1;
+	while (i < a->size)
+	{
+		if (a->stack[i] < min)
+			min = a->stack[i];
+		i++;
+	}
+	return (min);
+}
+
+int	find_max(t_stack *a)
+{
+	int	max;
+	int	i;
+
+	max = a->stack[0];
+	i = 1;
+	while (i < a->size)
+	{
+		if (a->stack[i] > max)
+			max = a->stack[i];
+		i++;
+	}
+	return (max);
+}
+
+int	find_min_index(t_stack *a)
+{
+	int	min;
+	int	i;
+	int	index;
+
+	min = a->stack[0];
+	i = 1;
+	index = 0;
+	while (i < a->size)
 	{
 		if (a->stack[i] < min)
 		{
 			min = a->stack[i];
-			min_index = i;
+			index = i;
 		}
 		i++;
 	}
-	return (min_index);
+	return (index);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack->size - 1)
+	{
+		if (stack->stack[i] > stack->stack[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
