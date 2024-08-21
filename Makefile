@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 18:00:25 by jcohen            #+#    #+#              #
-#    Updated: 2024/08/15 16:42:46 by jcohen           ###   ########.fr        #
+#    Updated: 2024/08/21 20:20:38 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = $(SRC_DIR)/$(SRC_MOV)/reverse_rotate.c $(SRC_DIR)/$(SRC_MOV)/rotate.c \
 	   $(SRC_DIR)/$(SRC_MOV)/swap_push.c $(SRC_DIR)/cleanup.c \
 	   $(SRC_DIR)/init.c $(SRC_DIR)/parsing.c $(SRC_DIR)/utils.c \
 	   $(SRC_DIR)/push_swap.c $(SRC_DIR)/$(SRC_SORT)/small_sorts.c \
-	   $(SRC_DIR)/$(SRC_SORT)/radix_sort.c
+	   $(SRC_DIR)/$(SRC_SORT)/radix_sort.c $(SRC_DIR)/utils2.c
 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/15 19:24:56 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/21 20:20:06 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@
 
 static int	is_valid_input(int ac, char **av)
 {
-	int		i;
 	char	**split;
 	int		j;
 
-	for (i = 1; i < ac; i++)
+	while (ac > 1)
 	{
-		split = ft_split(av[i], ' ');
+		split = ft_split(av[ac - 1], ' ');
 		if (!split)
 			return (0);
 		j = 0;
@@ -63,6 +62,7 @@ static int	is_valid_input(int ac, char **av)
 			j++;
 		}
 		ft_free_split(split);
+		ac--;
 	}
 	return (1);
 }
@@ -109,9 +109,7 @@ int	main(int ac, char **av)
 		if (ps->a->size <= 5)
 			sort_small_set(ps);
 		else
-		{
 			radix_sort(ps);
-		}
 	}
 	free_push_swap(ps);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 17:07:27 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/15 19:13:27 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/21 21:23:29 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,35 @@
 void	normalize_data(t_push_swap *ps)
 {
 	int	*temp;
-	int	*sorted;
-	int	tmp;
+	int	*ranks;
+	int	i;
+	int	j;
+	int	rank;
 
-	int i, j;
 	temp = malloc(ps->a->size * sizeof(int));
-	sorted = malloc(ps->a->size * sizeof(int));
-	if (!temp || !sorted)
-		ft_cleanup_and_print_error(ps);
-	for (i = 0; i < ps->a->size; i++)
+	ranks = malloc(ps->a->size * sizeof(int));
+	ft_copy_stack(ps->a->stack, temp, ps->a->size);
+	i = 0;
+	while (i < ps->a->size)
 	{
-		temp[i] = ps->a->stack[i];
-		sorted[i] = ps->a->stack[i];
-	}
-	for (i = 0; i < ps->a->size - 1; i++)
-	{
-		for (j = 0; j < ps->a->size - i - 1; j++)
+		rank = 0;
+		j = 0;
+		while (j < ps->a->size)
 		{
-			if (sorted[j] > sorted[j + 1])
-			{
-				tmp = sorted[j];
-				sorted[j] = sorted[j + 1];
-				sorted[j + 1] = tmp;
-			}
+			if (temp[j] < temp[i] || (temp[j] == temp[i] && j < i))
+				rank++;
+			j++;
 		}
+		ranks[i] = rank;
 	}
-	for (i = 0; i < ps->a->size; i++)
+	i = 0;
+	while (i < ps->a->size)
 	{
-		for (j = 0; j < ps->a->size; j++)
-		{
-			if (temp[i] == sorted[j])
-			{
-				ps->a->stack[i] = j;
-				break ;
-			}
-		}
+		ps->a->stack[i] = ranks[i];
+		i++;
 	}
 	free(temp);
-	free(sorted);
+	free(ranks);
 }
 
 int	get_bit(int num, int pos)
@@ -76,21 +67,27 @@ void	radix_sort(t_push_swap *ps)
 {
 	int	max_bits;
 	int	size;
+	int	i;
+	int	bit;
 
-	int i, j;
 	normalize_data(ps);
+	bit = 0;
 	max_bits = get_max_bits(ps);
 	size = ps->a->size;
-	for (i = 0; i < max_bits; i++)
+	i = 0;
+	while (bit < max_bits)
 	{
-		for (j = 0; j < size; j++)
+		i = 0;
+		while (i < size)
 		{
-			if (get_bit(ps->a->stack[0], i) == 0)
+			if ((ps->a->stack[0] & (1 << bit)) == 0)
 				ft_pb(ps);
 			else
 				ft_ra(ps);
+			i++;
 		}
 		while (ps->b->size > 0)
 			ft_pa(ps);
+		bit++;
 	}
 }

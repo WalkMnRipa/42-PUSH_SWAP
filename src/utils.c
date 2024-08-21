@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:19:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/15 19:26:28 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/21 20:15:51 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,39 +97,4 @@ int	find_max(t_stack *a)
 		i++;
 	}
 	return (max);
-}
-
-int	find_min_index(t_stack *a)
-{
-	int	min;
-	int	i;
-	int	index;
-
-	min = a->stack[0];
-	i = 1;
-	index = 0;
-	while (i < a->size)
-	{
-		if (a->stack[i] < min)
-		{
-			min = a->stack[i];
-			index = i;
-		}
-		i++;
-	}
-	return (index);
-}
-
-int	is_sorted(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->size - 1)
-	{
-		if (stack->stack[i] > stack->stack[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:16:57 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/15 19:36:02 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/15 19:51:20 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ int			find_min(t_stack *a);
 int			find_max(t_stack *a);
 int			find_min_index(t_stack *a);
 int			get_bit(int num, int pos);
-// int			get_max_bites(t_push_swap *ps);
+int			get_max_bites(t_push_swap *ps);
 int			is_sorted(t_stack *a);
+void		bubble_sort(int *arr, int n);
+void		ft_copy_stack(int *dest, int *src, int n);
 
 /*******************MOVEMENTS********************/
 void		ft_sa(t_push_swap *ps);
@@ -73,10 +75,8 @@ void		ft_rrb(t_push_swap *ps);
 void		ft_rrr(t_push_swap *ps);
 
 /*********************SORT**********************/
-// void		sort_two(t_push_swap *ps);
+void		sort_two(t_push_swap *ps);
 void		sort_three(t_push_swap *ps);
-// void		sort_four(t_push_swap *ps);
-// void		sort_five(t_push_swap *ps);
 void		sort_small_set(t_push_swap *ps);
 void		normalize_data(t_push_swap *ps);
 void		radix_sort(t_push_swap *ps);

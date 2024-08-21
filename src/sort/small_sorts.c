@@ -6,11 +6,17 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/15 19:35:32 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/15 19:41:08 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	sort_two(t_push_swap *ps)
+{
+	if (ps->a->stack[0] > ps->a->stack[1])
+		ft_sa(ps);
+}
 
 void	sort_three(t_push_swap *ps)
 {
@@ -43,17 +49,10 @@ void	sort_small_set(t_push_swap *ps)
 {
 	int	min_index;
 
-	if (ps->a->size <= 1)
-		return ;
-	else if (ps->a->size == 2)
-	{
-		if (ps->a->stack[0] > ps->a->stack[1])
-			ft_sa(ps);
-	}
+	if (ps->a->size == 2)
+		sort_two(ps);
 	else if (ps->a->size == 3)
-	{
 		sort_three(ps);
-	}
 	else
 	{
 		while (ps->a->size > 3)
