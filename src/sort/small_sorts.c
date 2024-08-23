@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/15 19:41:08 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/23 18:02:03 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,34 @@ void	sort_three(t_push_swap *ps)
 		ft_rra(ps);
 }
 
-void	sort_small_set(t_push_swap *ps)
+void	sort_four_five(t_push_swap *ps)
 {
 	int	min_index;
 
+	while (ps->a->size > 3)
+	{
+		min_index = find_minValue_ReturnIndex(ps->a);
+		while (min_index > 0)
+		{
+			if (min_index <= ps->a->size / 2)
+				ft_ra(ps);
+			else
+				ft_rra(ps);
+			min_index = find_minValue_ReturnIndex(ps->a);
+		}
+		ft_pb(ps);
+	}
+	sort_three(ps);
+	while (ps->b->size > 0)
+		ft_pa(ps);
+}
+
+void	sort_small_set(t_push_swap *ps)
+{
 	if (ps->a->size == 2)
 		sort_two(ps);
 	else if (ps->a->size == 3)
 		sort_three(ps);
-	else
-	{
-		while (ps->a->size > 3)
-		{
-			min_index = find_min_index(ps->a);
-			while (min_index > 0)
-			{
-				if (min_index <= ps->a->size / 2)
-					ft_ra(ps);
-				else
-					ft_rra(ps);
-				min_index = find_min_index(ps->a);
-			}
-			ft_pb(ps);
-		}
-		sort_three(ps);
-		while (ps->b->size > 0)
-			ft_pa(ps);
-	}
+	else if (ps->a->size <= 5)
+		sort_four_five(ps);
 }

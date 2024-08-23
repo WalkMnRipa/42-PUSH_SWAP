@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:04:23 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/13 16:07:06 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/23 18:34:08 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_ra(t_push_swap *ps)
 		ps->a->stack[i] = ps->a->stack[i + 1];
 		i++;
 	}
-	ps->a->stack[i] = tmp;
+	ps->a->stack[ps->a->size - 1] = tmp;
 	ft_printf("ra\n");
 }
 
@@ -44,7 +44,7 @@ void	ft_rb(t_push_swap *ps)
 		ps->b->stack[i] = ps->b->stack[i + 1];
 		i++;
 	}
-	ps->b->stack[i] = tmp;
+	ps->b->stack[ps->b->size - 1] = tmp;
 	ft_printf("rb\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:03:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 19:32:35 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/23 18:44:04 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	add_number_in_stack(t_stack *stack, char *str)
 	return (1);
 }
 
-int	parse_single_argument(t_stack *stack, char *str)
+int	parse_single_argument(t_push_swap *ps, char *str)
 {
 	char	**split;
 	int		i;
@@ -55,31 +55,33 @@ int	parse_single_argument(t_stack *stack, char *str)
 	i = 0;
 	while (split[i] && success)
 	{
-		if ((!is_valid(split[i]) || !add_number_in_stack(stack, split[i])))
+		if ((!is_valid(split[i]) || !add_number_in_stack(ps->a, split[i])))
 			success = 0;
 		i++;
 	}
 	ft_free_split(split);
+	simplify_stack(ps);
 	return (success);
 }
 
-int	parse_multiple_arguments(t_stack *stack, int nb_args, char **av)
+int	parse_multiple_arguments(t_push_swap *ps, int nb_args, char **av)
 {
 	int	i;
 
 	i = 1;
 	while (i < nb_args)
 	{
-		if (!is_valid(av[i]) || !add_number_in_stack(stack, av[i]))
+		if (!is_valid(av[i]) || !add_number_in_stack(ps->a, av[i]))
 			return (0);
 		i++;
 	}
+	simplify_stack(ps);
 	return (1);
 }
 
 int	parse_arguments(t_push_swap *ps, int ac, char **av)
 {
 	if (ac == 2)
-		return (parse_single_argument(ps->a, av[1]));
-	return (parse_multiple_arguments(ps->a, ac, av));
+		return (parse_single_argument(ps, av[1]));
+	return (parse_multiple_arguments(ps, ac, av));
 }

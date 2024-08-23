@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 20:12:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/21 20:13:47 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/23 18:47:25 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	bubble_sort(int *arr, int size)
 		j = 0;
 		while (j < size - i - 1)
 		{
-			if (arr[j] > arr[j + 1])
+			if (arr[j] < arr[j + 1])
 			{
 				tmp = arr[j];
 				arr[j] = arr[j + 1];
@@ -36,25 +36,18 @@ void	bubble_sort(int *arr, int size)
 	}
 }
 
-int	find_min_index(t_stack *a)
+int	find_index_in_stack(int *tab, int size, int nb)
 {
-	int	min;
 	int	i;
-	int	index;
 
-	min = a->stack[0];
-	i = 1;
-	index = 0;
-	while (i < a->size)
+	i = 0;
+	while (i < size)
 	{
-		if (a->stack[i] < min)
-		{
-			min = a->stack[i];
-			index = i;
-		}
+		if (tab[i] == nb)
+			return (i);
 		i++;
 	}
-	return (index);
+	return (-1);
 }
 
 int	is_sorted(t_stack *stack)
@@ -64,21 +57,21 @@ int	is_sorted(t_stack *stack)
 	i = 0;
 	while (i < stack->size - 1)
 	{
-		if (stack->stack[i] > stack->stack[i + 1])
+		if (stack->stack[i] < stack->stack[i + 1])
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void	ft_copy_stack(int *dest, int *src, int size)
+void	ft_copy_stack(int *dst, int *src, int size)
 {
 	int	i;
 
 	i = 0;
 	while (i < size)
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
 }

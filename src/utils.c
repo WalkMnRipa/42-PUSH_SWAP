@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:19:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/21 20:15:51 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/23 18:02:39 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,6 @@ int	count_total_numbers(int ac, char **av)
 	return (total_numbers);
 }
 
-int	find_min(t_stack *a)
-{
-	int	min;
-	int	i;
-
-	min = a->stack[0];
-	i = 1;
-	while (i < a->size)
-	{
-		if (a->stack[i] < min)
-			min = a->stack[i];
-		i++;
-	}
-	return (min);
-}
-
 int	find_max(t_stack *a)
 {
 	int	max;
@@ -97,4 +81,20 @@ int	find_max(t_stack *a)
 		i++;
 	}
 	return (max);
+}
+
+int	find_minValue_ReturnIndex(t_stack *stack)
+{
+	int	min_index;
+	int	i;
+
+	min_index = 0;
+	i = 1;
+	while (i < stack->size)
+	{
+		if (stack->stack[i] < stack->stack[min_index])
+			min_index = i;
+		i++;
+	}
+	return (min_index);
 }
