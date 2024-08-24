@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:16:57 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/23 18:41:32 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:55:26 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			count_total_numbers(int ac, char **av);
 void		ft_free_split(char **split);
 int			find_min_value_in_stack(t_stack *a);
 int			find_max(t_stack *a);
-int			find_minValue_ReturnIndex(t_stack *a);
+int			find_min_value_return_index(t_stack *a);
 int			find_index_in_stack(int *tab, int size, int nb);
 int			get_max_bites(int max);
 int			is_sorted(t_stack *a);

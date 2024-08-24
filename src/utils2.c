@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 20:12:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/23 18:47:25 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 20:51:03 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_sorted(t_stack *stack)
 	i = 0;
 	while (i < stack->size - 1)
 	{
-		if (stack->stack[i] < stack->stack[i + 1])
+		if (stack->stack[i] > stack->stack[i + 1])
 			return (0);
 		i++;
 	}

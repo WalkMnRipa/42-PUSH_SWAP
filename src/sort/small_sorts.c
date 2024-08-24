@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/23 18:02:03 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:55:11 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	sort_four_five(t_push_swap *ps)
 
 	while (ps->a->size > 3)
 	{
-		min_index = find_minValue_ReturnIndex(ps->a);
+		min_index = find_min_value_return_index(ps->a);
 		while (min_index > 0)
 		{
 			if (min_index <= ps->a->size / 2)
 				ft_ra(ps);
 			else
 				ft_rra(ps);
-			min_index = find_minValue_ReturnIndex(ps->a);
+			min_index = find_min_value_return_index(ps->a);
 		}
 		ft_pb(ps);
 	}

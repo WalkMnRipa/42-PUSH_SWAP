@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:03:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/23 18:44:04 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 20:51:37 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	parse_single_argument(t_push_swap *ps, char *str)
 		i++;
 	}
 	ft_free_split(split);
-	simplify_stack(ps);
 	return (success);
 }
 
@@ -75,7 +74,6 @@ int	parse_multiple_arguments(t_push_swap *ps, int nb_args, char **av)
 			return (0);
 		i++;
 	}
-	simplify_stack(ps);
 	return (1);
 }
 

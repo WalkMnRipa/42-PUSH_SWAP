@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:19:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/23 18:02:39 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:54:39 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	find_max(t_stack *a)
 	return (max);
 }
 
-int	find_minValue_ReturnIndex(t_stack *stack)
+int	find_min_value_return_index(t_stack *stack)
 {
 	int	min_index;
 	int	i;

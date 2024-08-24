@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/23 17:46:11 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 20:51:28 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ int	main(int ac, char **av)
 		if (ps->a->size <= 5)
 			sort_small_set(ps);
 		else
+		{
+			simplify_stack(ps);
 			radix_sort(ps);
+		}
 	}
 	free_push_swap(ps);
 	return (0);
