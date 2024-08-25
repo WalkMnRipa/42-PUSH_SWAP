@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 17:07:27 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/24 15:31:43 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/25 17:31:13 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void	simplify_stack(t_push_swap *ps)
 {
-	int	index;
-	int	*copy;
-	int	i;
+	int		i;
+	int		j;
+	int		rank;
+	long	*copy;
 
-	copy = malloc(sizeof(int) * ps->a->size);
+	copy = malloc(sizeof(long) * ps->a->size);
 	if (!copy)
 		ft_cleanup_and_print_error(ps);
-	ft_copy_stack(copy, ps->a->stack, ps->a->size);
-	bubble_sort(copy, ps->a->size);
-	i = 0;
-	while (i < ps->a->size)
+	i = -1;
+	while (++i < ps->a->size)
+		copy[i] = (long)ps->a->stack[i];
+	i = -1;
+	while (++i < ps->a->size)
 	{
-		index = find_index_in_stack(copy, ps->a->size, ps->a->stack[i]);
-		ps->a->stack[i] = index;
-		i++;
+		rank = 0;
+		j = -1;
+		while (++j < ps->a->size)
+			if (copy[j] > copy[i] || (j > i && copy[j] == copy[i]))
+				rank++;
+		ps->a->stack[i] = rank;
 	}
 	free(copy);
 }

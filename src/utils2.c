@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 20:12:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/24 20:51:03 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/25 17:30:11 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,20 @@ int	find_index_in_stack(int *tab, int size, int nb)
 
 int	is_sorted(t_stack *stack)
 {
-	int	i;
+	int		i;
+	long	prev;
+	long	curr;
 
+	if (stack->size <= 0)
+		return (1);
 	i = 0;
+	prev = (long)stack->stack[i];
 	while (i < stack->size - 1)
 	{
-		if (stack->stack[i] > stack->stack[i + 1])
+		curr = (long)stack->stack[i + 1];
+		if (prev < curr)
 			return (0);
+		prev = curr;
 		i++;
 	}
 	return (1);
