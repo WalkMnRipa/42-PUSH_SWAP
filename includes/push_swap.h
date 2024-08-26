@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:16:57 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/24 14:55:26 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/26 17:22:09 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			find_min_value_return_index(t_stack *a);
 int			find_index_in_stack(int *tab, int size, int nb);
 int			get_max_bites(int max);
 int			is_sorted(t_stack *a);
+int			is_sorted_start(t_stack *stack);
 void		bubble_sort(int *arr, int n);
 void		ft_copy_stack(int *dest, int *src, int n);
 

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/24 20:51:28 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/26 17:22:20 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main(int ac, char **av)
 		ft_cleanup_and_print_error(ps);
 		return (1);
 	}
-	if (!is_sorted(ps->a))
+	if (!is_sorted_start(ps->a))
 	{
 		if (ps->a->size <= 5)
 			sort_small_set(ps);

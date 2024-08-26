@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 20:12:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/25 17:30:11 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/26 17:21:51 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	bubble_sort(int *arr, int size)
 		j = 0;
 		while (j < size - i - 1)
 		{
-			if (arr[j] < arr[j + 1])
+			if (arr[j] > arr[j + 1])
 			{
 				tmp = arr[j];
 				arr[j] = arr[j + 1];
@@ -56,7 +56,7 @@ int	is_sorted(t_stack *stack)
 	long	prev;
 	long	curr;
 
-	if (stack->size <= 0)
+	if (stack->size <= 1)
 		return (1);
 	i = 0;
 	prev = (long)stack->stack[i];
@@ -81,4 +81,25 @@ void	ft_copy_stack(int *dst, int *src, int size)
 		dst[i] = src[i];
 		i++;
 	}
+}
+
+int	is_sorted_start(t_stack *stack)
+{
+	int		i;
+	long	prev;
+	long	curr;
+
+	if (stack->size <= 1)
+		return (1);
+	i = 0;
+	prev = (long)stack->stack[i];
+	while (i < stack->size - 1)
+	{
+		curr = (long)stack->stack[i + 1];
+		if (prev > curr)
+			return (0);
+		prev = curr;
+		i++;
+	}
+	return (1);
 }
