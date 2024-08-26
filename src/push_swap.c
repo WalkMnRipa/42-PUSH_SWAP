@@ -6,40 +6,11 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/26 17:22:20 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/26 19:07:33 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-// static void	print_tab(t_push_swap *ps)
-// {
-// 	int	max_size;
-// 	int	i;
-
-// 	if (ps->a->size > ps->b->size)
-// 		max_size = ps->a->size;
-// 	else
-// 		max_size = ps->b->size;
-// 	printf("^     | ^\n");
-// 	i = 0;
-// 	while (i < max_size)
-// 	{
-// 		if (i < ps->a->size)
-// 			printf("%-5d", ps->a->stack[i]);
-// 		else
-// 			printf("     ");
-// 		printf(" | ");
-// 		if (i < ps->b->size)
-// 			printf("%-5d", ps->b->stack[i]);
-// 		else
-// 			printf("     ");
-// 		printf("\n");
-// 		i++;
-// 	}
-// 	printf("----- | -----\n");
-// 	printf("  a   |   b\n");
-// }
 
 static int	is_valid_input(int ac, char **av)
 {
@@ -100,10 +71,7 @@ int	main(int ac, char **av)
 	}
 	ps = init_all(ac, av);
 	if (!ps || !parse_arguments(ps, ac, av))
-	{
-		ft_cleanup_and_print_error(ps);
-		return (1);
-	}
+		return (ft_cleanup_and_print_error(ps), 1);
 	if (!is_sorted_start(ps->a))
 	{
 		if (ps->a->size <= 5)
