@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:19:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/24 14:54:39 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:01:36 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_cleanup_and_print_error(t_push_swap *ps)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putendl_fd(ERROR_MESSAGE, ERROR_EXIT);
 	if (ps)
 		free_push_swap(ps);
 	exit(1);

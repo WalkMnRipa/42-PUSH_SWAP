@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:10:25 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/26 19:07:33 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:00:31 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!is_valid_input(ac, av))
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_putendl_fd(ERROR_MESSAGE, ERROR_EXIT);
 		return (1);
 	}
 	ps = init_all(ac, av);

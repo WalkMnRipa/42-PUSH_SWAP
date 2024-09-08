@@ -6,12 +6,14 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 18:16:57 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/26 17:22:09 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/26 19:27:27 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define ERROR_MESSAGE "Error"
+# define ERROR_EXIT 2
 
 # include "../libft/ft_printf.h"
 # include "../libft/libft.h"
