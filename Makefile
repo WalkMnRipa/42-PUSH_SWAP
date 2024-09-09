@@ -1,55 +1,53 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/08/08 18:00:25 by jcohen            #+#    #+#              #
-#    Updated: 2024/08/21 20:20:38 by jcohen           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# Colors
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+RED = \033[0;31m
+BLUE = \033[0;34m
+RESET = \033[0m
 
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_DIR = src
-SRC_MOV = movements
-SRC_SORT = sort
+SRCS = src/push_swap.c src/utils.c src/parsing.c src/cleanup.c src/init.c src/utils2.c src/movements/swap_push.c src/movements/rotate.c src/movements/reverse_rotate.c src/sort/normalize_stack.c src/sort/radix_sort.c src/sort/small_sorts.c
+
 OBJS_DIR = objs
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
-SRCS = $(SRC_DIR)/$(SRC_MOV)/reverse_rotate.c $(SRC_DIR)/$(SRC_MOV)/rotate.c \
-	   $(SRC_DIR)/$(SRC_MOV)/swap_push.c $(SRC_DIR)/cleanup.c \
-	   $(SRC_DIR)/init.c $(SRC_DIR)/parsing.c $(SRC_DIR)/utils.c \
-	   $(SRC_DIR)/push_swap.c $(SRC_DIR)/$(SRC_SORT)/small_sorts.c \
-	   $(SRC_DIR)/$(SRC_SORT)/radix_sort.c $(SRC_DIR)/utils2.c
-
-
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)
+DEPS = $(OBJS:.o=.d)
 
 LIBFT = libft/libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
+	@echo "$(BLUE)$(NAME) created!$(RESET)"
 
-$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -I./includes -I./libft -c $< -o $@
+	@printf "$(YELLOW)Compiling $<... $(RESET)"
+	@if $(CC) $(CFLAGS) -MMD -MP -I./includes -Ilibft -c $< -o $@ 2>/dev/null; then 		printf "$(GREEN)Done!$(RESET)\n"; 	else 		printf "$(RED)Failed!$(RESET)\n"; 		exit 1; 	fi
 
 $(LIBFT):
-	make -C libft
+	@echo "$(YELLOW)Compiling libft...$(RESET)"
+	@$(MAKE) -C libft > /dev/null
+	@echo "$(GREEN)libft compilation done!$(RESET)"
 
 clean:
-	make -C libft clean
-	rm -rf $(OBJS_DIR)
+	@echo "$(YELLOW)Cleaning up...$(RESET)"
+	@$(MAKE) -C libft clean > /dev/null
+	@rm -rf $(OBJS_DIR)
+	@echo "$(GREEN)Clean done!$(RESET)"
 
 fclean: clean
-	make -C libft fclean
-	rm -f $(NAME)
+	@echo "$(YELLOW)Full cleanup...$(RESET)"
+	@$(MAKE) -C libft fclean > /dev/null
+	@rm -f $(NAME)
+	@echo "$(GREEN)Full cleanup done!$(RESET)"
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+-include $(DEPS)
