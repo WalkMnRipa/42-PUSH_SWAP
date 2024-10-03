@@ -9,7 +9,7 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = src/push_swap.c src/utils.c src/parsing.c src/cleanup.c src/init.c src/utils2.c src/movements/swap_push.c src/movements/rotate.c src/movements/reverse_rotate.c src/sort/normalize_stack.c src/sort/radix_sort.c src/sort/small_sorts.c
+SRCS = src/push_swap.c src/utils.c src/parsing.c src/cleanup.c src/init.c src/utils2.c src/movements/swap_push.c src/movements/rotate.c src/movements/reverse_rotate.c src/sort/radix_sort.c src/sort/small_sorts.c
 
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -31,7 +31,7 @@ $(OBJS_DIR)/%.o: %.c
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(RESET)"
-	@$(MAKE) -C libft > /dev/null
+	@$(MAKE) -C libft > /dev/null 2>&1
 	@echo "$(GREEN)libft compilation done!$(RESET)"
 
 clean:
